@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Mala for Mantra Jap</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Otomanopee+One&family=Ubuntu:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <img src="namaskar.png" alt="namaskar" />
+        <h1 class="title">ॐ नमः शिवाय</h1>
+        <h1>Online Mala for Mantra Jap</h1>
+        <h3>Count your Mantra Jap online</h3>
+      </header>
+      <main>
+        <div class="both-counter">
+          <p>Manka counter</p>
+          <input type="text" value="0" class="manka" />
+          <p>Mala counter</p>
+          <input type="text" value="0" class="mala-count" />
+        </div>
+        <div class="mala-container"></div>
+      </main>
+      <footer>
+        <button class="reset-mala">Reset Mala</button>
+        <p>
+          Reset Button will make only clickable all Rudraksha. If you want to
+          reset all count values, reload your page.
+        </p>
+        <p class="msg">All Rudraksha are clickable</p>
+      </footer>
+    </div>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Ubuntu", sans-serif;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        min-height: 100vh;
+        justify-content: center;
+      }
+      header img {
+        width: 75px;
+      }
+      .title {
+        font-size: 45px;
+        color: #8c3906;
+      }
+      header,
+      main,
+      footer {
+        max-width: 920px;
+        margin: 0 auto;
+      }
+      header {
+        text-align: center;
+        padding: 20px 30px;
+        color: #d45509;
+      }
+      h3 {
+        padding-top: 7px;
+        color: #ff8f00;
+      }
+      main .both-counter {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px 0;
+        align-items: center;
+      }
+      .mala-container {
+        text-align: center;
+      }
+      input {
+        border: 1px solid #d45508;
+        padding: 5px 10px;
+      }
+      img {
+        cursor: pointer;
+        filter: grayscale(100%);
+      }
+      img.active {
+        filter: grayscale(0%);
+        transition: 0.5s;
+        pointer-events: none;
+      }
+      footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+        text-align: center;
+      }
+      button.reset-mala {
+        border: 3px solid #d45508;
+        background-color: #793232a6;
+        padding: 10px 25px;
+        margin-bottom: 20px;
+        color: white;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        text-shadow: 0 2px #883807;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      .msg {
+        opacity: 0;
+        padding: 5px;
+        color: green;
+      }
+      @media screen and (max-width: 950px) {
+        body {
+          padding: 20px;
+        }
+        main .both-counter {
+          flex-direction: column;
+        }
+        input {
+          margin: 5px 0;
+        }
+        header img {
+          width: 45px;
+        }
+        img {
+          width: 30px;
+        }
+      }
+      @media screen and (max-width: 420px) {
+        body {
+          padding: 10px;
+        }
+        h1 {
+          font-size: 25px;
+        }
+        .title {
+          font-size: 35px;
+        }
+        h3 {
+          font-size: 15px;
+        }
+        main .both-counter {
+          padding: 15px 0;
+        }
+        button.reset-mala {
+          font-size: 13px;
+        }
+      }
+    </style>
+    <script>
+      let maxLength = 109;
+      for (let i = 1; i < maxLength; i++) {
+        let malaContainer = document.querySelector(".mala-container");
+        // var pTag = document.createElement("span");
+        // pTag.innerText = `${i}`;
+        // blank.appendChild(pTag);
+        let imgTag = document.createElement("img");
+        malaContainer.appendChild(imgTag);
+        imgTag.setAttribute("src", "rudrash.png");
+        imgTag.setAttribute("width", "40px");
+        imgTag.classList.add(`rudra-${i}`);
+      }
+
+      let allImg = document.querySelectorAll("img");
+      let inputVal = 0;
+      let malaVal = 0;
+      let mCounter = document.querySelector(".manka");
+      let malaCounter = document.querySelector(".mala-count");
+      let raj;
+      for (item of allImg) {
+        item.addEventListener("click", function () {
+          this.classList.add("active");
+          mCounter.value = ++inputVal;
+          mCounter.setAttribute("value", +inputVal);
+          malaCounter.value = Math.floor(mCounter.value / 108);
+        });
+      }
+      let msg = document.querySelector(".msg");
+
+      let resetMala = document.querySelector(".reset-mala");
+      resetMala.addEventListener("click", function () {
+        for (j of allImg) {
+          j.classList.remove("active");
+        }
+        msg.style.opacity = "1";
+        setTimeout(function we() {
+          msg.style.opacity = "0";
+        }, 2000);
+        we();
+      });
+    </script>
+  </body>
+</html>
